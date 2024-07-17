@@ -78,7 +78,7 @@ export const addReview = createAsyncThunk(
 export const listFreelancer = createAsyncThunk(
   "review/listFreelancer",
   async (
-    { skip = 0, limit = 10, ordering = "created_at" },
+    { skip = 0, limit = 10, ordering = "-created_at" },
     { rejectWithValue }
   ) => {
     try {
@@ -109,7 +109,7 @@ export const listReviewByFreelancer = createAsyncThunk(
 export const listReviews = createAsyncThunk(
   "review/listReviews",
   async (
-    { skip = 0, limit = 10, ordering = "created_at" },
+    { skip = 0, limit = 10, ordering = "-created_at" },
     { rejectWithValue }
   ) => {
     try {

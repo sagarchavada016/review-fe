@@ -18,7 +18,7 @@ const Freelancers = () => {
 
   useEffect(() => {
     dispatch(listFreelancer({ skip, limit, ordering }));
-  }, [dispatch, skip]);
+  }, [dispatch, skip, ordering]);
 
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -40,6 +40,17 @@ const Freelancers = () => {
         >
           Add Freelancer
         </button>
+        <div className="flex justify-end mb-4">
+          <select
+            value={ordering}
+            onChange={(e) => setOrdering(e.target.value)}
+            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="-created_at">Newest First</option>
+            <option value="created_at">Oldest First</option>
+          </select>
+        </div>
+
         {freelancerList && freelancerList.result.length > 0 ? (
           <div className="space-y-4">
             {freelancerList.result.map((freelancer) => (
@@ -60,6 +71,14 @@ const Freelancers = () => {
                   </span>
                   <span className="text-lg font-semibold text-indigo-600">
                     {freelancer.name}
+                  </span>
+                </div>
+                <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
+                  <span className="text-sm font-medium text-gray-600">
+                    Created At:
+                  </span>
+                  <span className="text-lg font-semibold text-gray-900">
+                    {new Date(freelancer.created_at).toLocaleString()}
                   </span>
                 </div>
               </div>
