@@ -10,7 +10,7 @@ import { ReviewApi } from "../../services/apis/ReviewApis";
 
 export const initialState = {
   loading: false,
-  freelancerList: null,
+  freelancerList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   reviewsList: null,
   error: null,
 };

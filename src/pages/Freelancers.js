@@ -27,20 +27,23 @@ const Freelancers = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <button onClick={() => setShowAddModal(true)}>Add Freelancer</button>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        Freelancers List
-      </h1>
-      {freelancerList && freelancerList.result.length > 0 ? (
-        <>
-          <ul className="divide-y divide-gray-300">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
+      <div className="w-full max-w-4xl px-8 py-6 space-y-6">
+        <h1 className="text-2xl font-bold text-gray-800">Freelancers List</h1>
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Freelancer
+        </button>
+        {freelancerList && freelancerList.result.length > 0 ? (
+          <div className="space-y-4">
             {freelancerList.result.map((freelancer) => (
-              <li
+              <div
                 key={freelancer.id}
-                className="py-4 flex justify-between items-center hover:bg-gray-50"
+                className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow"
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 mb-4 md:mb-0">
                   <span className="text-sm font-medium text-gray-600">ID:</span>
                   <span className="text-lg font-semibold text-gray-900">
                     {freelancer.id}
@@ -54,19 +57,19 @@ const Freelancers = () => {
                     {freelancer.name}
                   </span>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
-          <Pagination
-            total={freelancerList.totalRecords}
-            limit={limit}
-            skip={skip}
-            onPageChange={(newSkip) => setSkip(newSkip)}
-          />
-        </>
-      ) : (
-        <p className="text-center text-gray-600">No freelancers found.</p>
-      )}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600">No freelancers found.</p>
+        )}
+        <Pagination
+          total={freelancerList.totalRecords}
+          limit={limit}
+          skip={skip}
+          onPageChange={(newSkip) => setSkip(newSkip)}
+        />
+      </div>
       <AddFreelancer
         isVisible={showAddModal}
         onClose={() => setShowAddModal(false)}
