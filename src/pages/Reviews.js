@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { listReviews } from "../redux/slices/reviewSlice";
+import { getReviewsAvg, listReviews } from "../redux/slices/reviewSlice";
 import Pagination from "../components/Pagination";
 
 const Reviews = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { allReviewsList } = useSelector((state) => state.review);
+  const { allReviewsList, avgReview } = useSelector((state) => state.review);
 
   const [skip, setSkip] = useState(0);
   const [ordering, setOrdering] = useState("-created_at");
@@ -16,6 +16,7 @@ const Reviews = () => {
 
   useEffect(() => {
     dispatch(listReviews({ skip, limit, ordering }));
+    dispatch(getReviewsAvg());
   }, [dispatch, skip, ordering]);
 
   const handleAllFreelancerClick = () => {
@@ -34,7 +35,17 @@ const Reviews = () => {
           </button>
         </div>
         <h1 className="text-2xl font-bold text-gray-800">Reviews List</h1>
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <span className="text-lg font-semibold text-gray-800">
+              Average Rating:{" "}
+            </span>
+            <span className="text-lg font-semibold text-indigo-600">
+              {avgReview.average_rating
+                ? parseFloat(avgReview.average_rating).toFixed(2)
+                : "No Ratings"}
+            </span>
+          </div>
           <select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}

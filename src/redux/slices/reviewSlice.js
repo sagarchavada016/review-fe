@@ -14,6 +14,8 @@ export const initialState = {
   reviewsList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   allReviewsList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   freelancerDetails: null,
+  avgReview: 0,
+  freelancerAvgReview: 0,
   error: null,
 };
 
@@ -43,6 +45,14 @@ const handleFulfilled = (state, action) => {
 
   if (action.type.startsWith("review/listReviews")) {
     state.allReviewsList = action.payload?.data;
+  }
+
+  if (action.type.startsWith("review/getReviewsAvg")) {
+    state.avgReview = action.payload;
+  }
+
+  if (action.type.startsWith("review/freelancerAvgReview")) {
+    state.freelancerAvgReview = action.payload?.data;
   }
 
   if (action.type.startsWith("review/addFreelancer")) {
@@ -91,6 +101,30 @@ export const getFreelancerDetails = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await ReviewApi.getFreelancerDetails(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const freelancerWiseAvgReview = createAsyncThunk(
+  "review/freelancerAvgReview",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.getFreelancerWiseAvgReview(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const getReviewsAvg = createAsyncThunk(
+  "review/getReviewsAvg",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.getReviewsAvg(data);
       return response;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);

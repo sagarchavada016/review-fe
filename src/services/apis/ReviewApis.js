@@ -46,4 +46,15 @@ export class ReviewApi {
     let url = `${urls.freelancer.details}${freelancerId}`;
     return ReviewService.get(url, data);
   }
+
+  static getReviewsAvg(data) {
+    let url = `${urls.review.averageReview}`;
+    return ReviewService.get(url, data);
+  }
+
+  static getFreelancerWiseAvgReview(data) {
+    let freelancerId = data.freelancerId;
+    let url = `/freelancers/${freelancerId}/average-rating/`;
+    return ReviewService.get(url, data);
+  }
 }

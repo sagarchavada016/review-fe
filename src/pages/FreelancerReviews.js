@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import {
+  freelancerWiseAvgReview,
   getFreelancerDetails,
   listReviewByFreelancer,
 } from "../redux/slices/reviewSlice";
@@ -14,7 +15,7 @@ const FreelancerReviews = () => {
   const { freelancerId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { reviewsList, freelancerDetails } = useSelector(
+  const { reviewsList, freelancerDetails, freelancerAvgReview } = useSelector(
     (state) => state.review
   );
 
@@ -27,29 +28,40 @@ const FreelancerReviews = () => {
   useEffect(() => {
     dispatch(listReviewByFreelancer({ skip, limit, ordering, freelancerId }));
     dispatch(getFreelancerDetails({ freelancerId }));
+    dispatch(freelancerWiseAvgReview({ freelancerId }));
   }, [dispatch, skip, freelancerId, ordering]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
       <div className="w-full max-w-screen-lg px-8 py-6 space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center w-full">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center">
             <FontAwesomeIcon
               icon={faArrowLeft}
               className="mr-2 cursor-pointer"
               onClick={() => navigate(-1)}
             />
-            Reviews for Freelancer:
+            Reviews for Freelancer:{" "}
             {freelancerDetails ? freelancerDetails.name : "Loading..."}
           </h1>
-          <button
-            onClick={() => setShowAddReviewModal(true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Review
-          </button>
         </div>
-        <div className="flex justify-end mb-4">
+        <button
+          onClick={() => setShowAddReviewModal(true)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Review
+        </button>
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <span className="text-lg font-semibold text-gray-800">
+              Average Rating:{" "}
+            </span>
+            <span className="text-lg font-semibold text-indigo-600">
+              {freelancerAvgReview.average_rating
+                ? parseFloat(freelancerAvgReview.average_rating).toFixed(2)
+                : "No Ratings"}
+            </span>
+          </div>
           <select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}

@@ -4,6 +4,7 @@ export const urls = {
     listByFreelancerId: "/reviews/",
     add: "/review/",
     listReviews: "/reviews/list",
+    averageReview: "/reviews/average-rating/",
   },
   freelancer: {
     add: "/freelancer/",
