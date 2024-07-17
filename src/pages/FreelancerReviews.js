@@ -44,34 +44,36 @@ const FreelancerReviews = () => {
             Reviews for Freelancer:{" "}
             {freelancerDetails ? freelancerDetails.name : "Loading..."}
           </h1>
+        </div>
+        <div className="flex flex-col items-start w-full">
           <button
             onClick={() => setShowAddReviewModal(true)}
-            className="bg-custom-green hover:bg-white text-white hover:text-custom-green font-bold py-1 md:py-2 px-2 md:px-4 rounded"
+            className="bg-custom-green hover:bg-white text-white hover:text-custom-green font-bold py-1 md:py-2 px-2 md:px-4 rounded mb-2"
           >
             Add Review
           </button>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <span className="text-md md:text-lg font-semibold text-gray-800">
-              Average Rating:
-            </span>
-            <span className="text-md md:text-lg font-semibold text-custom-green">
-              {freelancerAvgReview.average_rating
-                ? parseFloat(freelancerAvgReview.average_rating).toFixed(2)
-                : "No Ratings"}
-            </span>
+          <div className="flex justify-between items-center w-full mb-4">
+            <div>
+              <span className="text-md md:text-lg font-semibold text-gray-800">
+                Average Rating:
+              </span>
+              <span className="text-md md:text-lg font-semibold text-custom-green">
+                {freelancerAvgReview.average_rating
+                  ? parseFloat(freelancerAvgReview.average_rating).toFixed(2)
+                  : "No Ratings"}
+              </span>
+            </div>
+            <select
+              value={ordering}
+              onChange={(e) => setOrdering(e.target.value)}
+              className="text-sm md:text-md py-1 md:py-2 px-2 md:px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green"
+            >
+              <option value="-created_at">Newest First</option>
+              <option value="created_at">Oldest First</option>
+              <option value="rating">Rating: Low to High</option>
+              <option value="-rating">Rating: High to Low</option>
+            </select>
           </div>
-          <select
-            value={ordering}
-            onChange={(e) => setOrdering(e.target.value)}
-            className="text-sm md:text-md py-1 md:py-2 px-2 md:px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green"
-          >
-            <option value="-created_at">Newest First</option>
-            <option value="created_at">Oldest First</option>
-            <option value="rating">Rating: Low to High</option>
-            <option value="-rating">Rating: High to Low</option>
-          </select>
         </div>
         {reviewsList && reviewsList.result.length > 0 ? (
           <div className="space-y-4">
