@@ -30,6 +30,10 @@ const handleFulfilled = (state, action) => {
   if (action.type.startsWith("review/listFreelancer")) {
     state.freelancerList = action.payload?.data;
   }
+
+  if (action.type.startsWith("review/addFreelancer")) {
+    state.freelancerList.result.push(action.payload.data);
+  }
 };
 
 export const addFreelancer = createAsyncThunk(
