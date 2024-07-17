@@ -12,14 +12,17 @@ const AddReview = ({ isVisible, onClose, freelancerId }) => {
     event.preventDefault();
     const reviewData = {
       reviewer_name: reviewerName,
-      rating,
+      rating: parseInt(rating, 10), // ensure the rating is an integer
       review_text: reviewText,
       freelancerId,
     };
     dispatch(addReview(reviewData))
       .unwrap()
       .then(() => {
-        onClose();
+        onClose(); // Close modal on success
+        setReviewerName(""); // Reset state on successful addition
+        setRating(""); // Reset state on successful addition
+        setReviewText(""); // Reset state on successful addition
       })
       .catch((error) => {
         console.error("Failed to add review:", error);
@@ -29,8 +32,8 @@ const AddReview = ({ isVisible, onClose, freelancerId }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4 py-2">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-xl font-semibold mb-4">Add Review</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

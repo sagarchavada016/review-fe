@@ -11,7 +11,8 @@ const AddFreelancer = ({ isVisible, onClose }) => {
     dispatch(addFreelancer({ name }))
       .unwrap()
       .then(() => {
-        onClose();
+        onClose(); // Close modal on success
+        setName(""); // Reset input field after successful addition
       })
       .catch((error) => {
         console.error("Failed to add freelancer:", error);
@@ -21,8 +22,8 @@ const AddFreelancer = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4 py-2">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-xl font-semibold mb-4">Add Freelancer</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
