@@ -30,7 +30,7 @@ const Freelancers = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
-      <div className="w-full max-w-4xl px-8 py-6 space-y-6">
+      <div className="w-full max-w-screen-lg px-8 py-6 space-y-6">
         <div className="flex justify-end">
           <button
             onClick={handleAllReviewsClick}
@@ -62,7 +62,7 @@ const Freelancers = () => {
             {freelancerList.result.map((freelancer) => (
               <div
                 key={freelancer.id}
-                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow cursor-pointer"
+                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow w-full cursor-pointer"
                 onClick={() => handleRowClick(freelancer.id)}
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
@@ -71,12 +71,20 @@ const Freelancers = () => {
                     {freelancer.id}
                   </span>
                 </div>
-                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
                     Name:
                   </span>
                   <span className="text-lg font-semibold text-indigo-600 truncate">
                     {freelancer.name}
+                  </span>
+                </div>
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
+                  <span className="text-sm font-medium text-gray-600">
+                    Review Count
+                  </span>
+                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                    {freelancer.review_count}
                   </span>
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">

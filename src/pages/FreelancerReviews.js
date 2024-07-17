@@ -31,24 +31,24 @@ const FreelancerReviews = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
-      <div className="w-full max-w-4xl px-8 py-6 space-y-6">
+      <div className="w-full max-w-screen-lg px-8 py-6 space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center">
             <FontAwesomeIcon
               icon={faArrowLeft}
-              className="mr-2"
+              className="mr-2 cursor-pointer"
               onClick={() => navigate(-1)}
             />
-            Reviews for Freelancer:{" "}
+            Reviews for Freelancer:
             {freelancerDetails ? freelancerDetails.name : "Loading..."}
           </h1>
+          <button
+            onClick={() => setShowAddReviewModal(true)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Add Review
+          </button>
         </div>
-        <button
-          onClick={() => setShowAddReviewModal(true)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Add Review
-        </button>
         <div className="flex justify-end mb-4">
           <select
             value={ordering}
@@ -66,7 +66,7 @@ const FreelancerReviews = () => {
             {reviewsList.result.map((review) => (
               <div
                 key={review.id}
-                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow"
+                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow w-full"
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
@@ -76,7 +76,7 @@ const FreelancerReviews = () => {
                     {review.reviewer_name}
                   </span>
                 </div>
-                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
                     Rating:
                   </span>
@@ -84,7 +84,7 @@ const FreelancerReviews = () => {
                     {review.rating}
                   </span>
                 </div>
-                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
                     Content:
                   </span>
