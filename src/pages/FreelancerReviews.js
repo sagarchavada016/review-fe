@@ -41,7 +41,7 @@ const FreelancerReviews = () => {
               className="mr-2 cursor-pointer"
               onClick={() => navigate(-1)}
             />
-            Reviews for Freelancer:{" "}
+            Reviews for Freelancer :{" "}
             {freelancerDetails ? freelancerDetails.name : "Loading..."}
           </h1>
         </div>
@@ -54,7 +54,7 @@ const FreelancerReviews = () => {
         <div className="flex justify-between items-center mb-4">
           <div>
             <span className="text-lg font-semibold text-gray-800">
-              Average Rating:{" "}
+              Average Rating :{" "}
             </span>
             <span className="text-lg font-semibold text-custom-green">
               {freelancerAvgReview.average_rating
@@ -82,7 +82,7 @@ const FreelancerReviews = () => {
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Reviewer Name:
+                    Reviewer Name :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {review.reviewer_name}
@@ -90,7 +90,7 @@ const FreelancerReviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Rating:
+                    Rating :{" "}
                   </span>
                   <span className="text-lg font-semibold text-custom-green truncate">
                     {review.rating}
@@ -98,7 +98,7 @@ const FreelancerReviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Content:
+                    Content :{" "}
                   </span>
                   <span className="text-lg font-semibold text-custom-green truncate">
                     {review.review_text}
@@ -106,7 +106,7 @@ const FreelancerReviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Created At:
+                    Created At :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {new Date(review.created_at).toLocaleString()}

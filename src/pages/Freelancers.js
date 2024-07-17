@@ -66,14 +66,16 @@ const Freelancers = () => {
                 onClick={() => handleRowClick(freelancer.id)}
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
-                  <span className="text-sm font-medium text-gray-600">ID:</span>
+                  <span className="text-sm font-medium text-gray-600">
+                    ID :{" "}
+                  </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {freelancer.id}
                   </span>
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Name:
+                    Name :{" "}
                   </span>
                   <span className="text-lg font-semibold text-custom-green truncate">
                     {freelancer.name}
@@ -81,7 +83,7 @@ const Freelancers = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Review Count
+                    Review Count :{" "}
                   </span>
                   <span className="text-lg font-semibold text-custom-green truncate">
                     {freelancer.review_count}
@@ -89,7 +91,7 @@ const Freelancers = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Created At:
+                    Created At :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {new Date(freelancer.created_at).toLocaleString()}

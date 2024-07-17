@@ -66,7 +66,7 @@ const Reviews = () => {
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Reviewer Name:
+                    Reviewer Name :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {review.reviewer_name}
@@ -74,7 +74,7 @@ const Reviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Rating:
+                    Rating :{" "}
                   </span>
                   <span className="text-lg font-semibold text-custom-green truncate">
                     {review.rating}
@@ -82,7 +82,7 @@ const Reviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Review Text:
+                    Review Text :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {review.review_text}
@@ -90,7 +90,7 @@ const Reviews = () => {
                 </div>
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
-                    Created At:
+                    Created At :{" "}
                   </span>
                   <span className="text-lg font-semibold text-gray-900 truncate">
                     {new Date(review.created_at).toLocaleString()}
