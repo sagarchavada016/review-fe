@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { listReviewByFreelancer } from "../redux/slices/reviewSlice";
+import { useParams, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  getFreelancerDetails,
+  listReviewByFreelancer,
+} from "../redux/slices/reviewSlice";
 import Pagination from "../components/Pagination";
 import AddReview from "../modals/AddReview";
 
 const FreelancerReviews = () => {
   const { freelancerId } = useParams();
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error, reviewsList } = useSelector((state) => state.review);
+  const { reviewsList, freelancerDetails } = useSelector(
+    (state) => state.review
+  );
 
   const [skip, setSkip] = useState(0);
   const limit = 10;
@@ -19,18 +26,23 @@ const FreelancerReviews = () => {
 
   useEffect(() => {
     dispatch(listReviewByFreelancer({ skip, limit, ordering, freelancerId }));
+    dispatch(getFreelancerDetails({ freelancerId }));
   }, [dispatch, skip, freelancerId, ordering]);
-
-  if (loading) {
-    return <p className="text-center text-blue-500 text-lg">Loading...</p>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
       <div className="w-full max-w-4xl px-8 py-6 space-y-6">
-        <h1 className="text-2xl font-bold text-gray-800">
-          Reviews for Freelancer ID: {freelancerId}
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-800 flex items-center">
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="mr-2"
+              onClick={() => navigate(-1)}
+            />
+            Reviews for Freelancer:{" "}
+            {freelancerDetails ? freelancerDetails.name : "Loading..."}
+          </h1>
+        </div>
         <button
           onClick={() => setShowAddReviewModal(true)}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -54,43 +66,39 @@ const FreelancerReviews = () => {
             {reviewsList.result.map((review) => (
               <div
                 key={review.id}
-                className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow"
+                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow"
               >
-                <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 md:space-x-3 mb-4 md:mb-0 w-full">
-                  <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 md:space-x-3 w-full">
-                    <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
-                      <span className="text-sm font-medium text-gray-600">
-                        Reviewer Name:
-                      </span>
-                      <span className="text-lg font-semibold text-gray-900">
-                        {review.reviewer_name}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
-                      <span className="text-sm font-medium text-gray-600">
-                        Rating:
-                      </span>
-                      <span className="text-lg font-semibold text-indigo-600">
-                        {review.rating}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
-                      <span className="text-sm font-medium text-gray-600">
-                        Content:
-                      </span>
-                      <span className="text-lg font-semibold text-indigo-600">
-                        {review.review_text}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
-                      <span className="text-sm font-medium text-gray-600">
-                        Created At:
-                      </span>
-                      <span className="text-lg font-semibold text-gray-900">
-                        {new Date(review.created_at).toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                  <span className="text-sm font-medium text-gray-600">
+                    Reviewer Name:
+                  </span>
+                  <span className="text-lg font-semibold text-gray-900 truncate">
+                    {review.reviewer_name}
+                  </span>
+                </div>
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                  <span className="text-sm font-medium text-gray-600">
+                    Rating:
+                  </span>
+                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                    {review.rating}
+                  </span>
+                </div>
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                  <span className="text-sm font-medium text-gray-600">
+                    Content:
+                  </span>
+                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                    {review.review_text}
+                  </span>
+                </div>
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
+                  <span className="text-sm font-medium text-gray-600">
+                    Created At:
+                  </span>
+                  <span className="text-lg font-semibold text-gray-900 truncate">
+                    {new Date(review.created_at).toLocaleString()}
+                  </span>
                 </div>
               </div>
             ))}

@@ -40,4 +40,10 @@ export class ReviewApi {
     let url = `${urls.review.listReviews}?skip=${skip}&limit=${limit}&ordering=${ordering}`;
     return ReviewService.get(url, data);
   }
+
+  static getFreelancerDetails(data) {
+    let freelancerId = data.freelancerId;
+    let url = `${urls.freelancer.details}${freelancerId}`;
+    return ReviewService.get(url, data);
+  }
 }

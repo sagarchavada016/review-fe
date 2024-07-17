@@ -8,9 +8,7 @@ import AddFreelancer from "../modals/AddFreelancer";
 const Freelancers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, freelancerList } = useSelector(
-    (state) => state.review
-  );
+  const { freelancerList } = useSelector((state) => state.review);
 
   const [skip, setSkip] = useState(0);
   const [ordering, setOrdering] = useState("-created_at");
@@ -25,10 +23,6 @@ const Freelancers = () => {
   const handleRowClick = (freelancerId) => {
     navigate(`/reviews/${freelancerId}`);
   };
-
-  if (loading) {
-    return <p className="text-center text-blue-500 text-lg">Loading...</p>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
@@ -56,28 +50,28 @@ const Freelancers = () => {
             {freelancerList.result.map((freelancer) => (
               <div
                 key={freelancer.id}
-                className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow cursor-pointer"
+                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow cursor-pointer"
                 onClick={() => handleRowClick(freelancer.id)}
               >
-                <div className="flex items-center space-x-3 mb-4 md:mb-0">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">ID:</span>
-                  <span className="text-lg font-semibold text-gray-900">
+                  <span className="text-lg font-semibold text-gray-900 truncate">
                     {freelancer.id}
                   </span>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
                     Name:
                   </span>
-                  <span className="text-lg font-semibold text-indigo-600">
+                  <span className="text-lg font-semibold text-indigo-600 truncate">
                     {freelancer.name}
                   </span>
                 </div>
-                <div className="flex flex-col items-start md:flex-row md:items-center md:space-x-3">
+                <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">
                     Created At:
                   </span>
-                  <span className="text-lg font-semibold text-gray-900">
+                  <span className="text-lg font-semibold text-gray-900 truncate">
                     {new Date(freelancer.created_at).toLocaleString()}
                   </span>
                 </div>

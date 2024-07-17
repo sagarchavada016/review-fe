@@ -13,6 +13,7 @@ export const initialState = {
   freelancerList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   reviewsList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   allReviewsList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
+  freelancerDetails: null,
   error: null,
 };
 
@@ -30,6 +31,10 @@ const handleFulfilled = (state, action) => {
 
   if (action.type.startsWith("review/listFreelancer")) {
     state.freelancerList = action.payload?.data;
+  }
+
+  if (action.type.startsWith("review/getFreelancerDetails")) {
+    state.freelancerDetails = action.payload?.data;
   }
 
   if (action.type.startsWith("review/listReviewByFreelancer")) {
@@ -68,6 +73,18 @@ export const addReview = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await ReviewApi.addReview(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const getFreelancerDetails = createAsyncThunk(
+  "review/getFreelancerDetails",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.getFreelancerDetails(data);
       return response;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);

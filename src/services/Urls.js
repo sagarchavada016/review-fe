@@ -8,5 +8,6 @@ export const urls = {
   freelancer: {
     add: "/freelancer/",
     list: "/freelancers/",
+    details: "/freelancers/",
   },
 };
