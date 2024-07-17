@@ -39,7 +39,7 @@ const Reviews = () => {
         <div className="flex justify-between items-center mb-4">
           <div>
             <span className="text-md md:text-lg font-semibold text-gray-800">
-              Average Rating:
+              Average Rating :{" "}
             </span>
             <span className="text-md md:text-lg font-semibold text-custom-green">
               {avgReview.average_rating
@@ -64,36 +64,67 @@ const Reviews = () => {
               <div
                 key={review.id}
                 className="flex flex-col md:flex-row justify-between items-start bg-white p-2 md:p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow w-full cursor-pointer hover:bg-gray-50"
+                title={`Reviewer Name: ${review.reviewer_name}, Rating: ${
+                  review.rating
+                }, Review Text: ${review.review_text}, Created At: ${new Date(
+                  review.created_at
+                ).toLocaleString()}`}
               >
                 <div className="flex-1 mb-2 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
-                  <span className="text-sm font-medium text-gray-600">
+                  <span
+                    className="text-sm font-medium text-gray-600"
+                    title={review.reviewer_name}
+                  >
                     Reviewer Name:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-gray-900 truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-gray-900 truncate"
+                    title={review.reviewer_name}
+                  >
                     {review.reviewer_name}
                   </span>
                 </div>
                 <div className="flex-1 mb-2 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
-                  <span className="text-sm font-medium text-gray-600">
+                  <span
+                    className="text-sm font-medium text-gray-600"
+                    title={`Rating: ${review.rating}`}
+                  >
                     Rating:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-custom-green truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-custom-green truncate"
+                    title={`Rating: ${review.rating}`}
+                  >
                     {review.rating}
                   </span>
                 </div>
                 <div className="flex-1 mb-2 md:mb-0 md:flex md:items-center md:space-x-1 overflow-hidden">
-                  <span className="text-sm font-medium text-gray-600">
+                  <span
+                    className="text-sm font-medium text-gray-600"
+                    title={review.review_text}
+                  >
                     Review Text:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-gray-900 truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-gray-900 truncate"
+                    title={review.review_text}
+                  >
                     {review.review_text}
                   </span>
                 </div>
                 <div className="flex-1 md:flex md:items-center md:space-x-3 overflow-hidden">
-                  <span className="text-sm font-medium text-gray-600">
+                  <span
+                    className="text-sm font-medium text-gray-600"
+                    title={`Created At: ${new Date(
+                      review.created_at
+                    ).toLocaleString()}`}
+                  >
                     Created At:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-gray-900 truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-gray-900 truncate"
+                    title={new Date(review.created_at).toLocaleString()}
+                  >
                     {new Date(review.created_at).toLocaleString()}
                   </span>
                 </div>

@@ -68,7 +68,10 @@ const Freelancers = () => {
               >
                 <div className="flex-1 mb-2 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
                   <span className="text-sm font-medium text-gray-600">ID:</span>
-                  <span className="text-md md:text-lg font-semibold text-gray-900 truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-gray-900 truncate"
+                    title={freelancer.id}
+                  >
                     {freelancer.id}
                   </span>
                 </div>
@@ -76,7 +79,10 @@ const Freelancers = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Name:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-custom-green truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-custom-green truncate"
+                    title={freelancer.name}
+                  >
                     {freelancer.name}
                   </span>
                 </div>
@@ -84,7 +90,10 @@ const Freelancers = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Review Count:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-custom-green truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-custom-green truncate"
+                    title={String(freelancer.review_count)}
+                  >
                     {freelancer.review_count}
                   </span>
                 </div>
@@ -92,7 +101,10 @@ const Freelancers = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Created At:
                   </span>
-                  <span className="text-md md:text-lg font-semibold text-gray-900 truncate">
+                  <span
+                    className="text-md md:text-lg font-semibold text-gray-900 truncate"
+                    title={new Date(freelancer.created_at).toLocaleString()}
+                  >
                     {new Date(freelancer.created_at).toLocaleString()}
                   </span>
                 </div>
