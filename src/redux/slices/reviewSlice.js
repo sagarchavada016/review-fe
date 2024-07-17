@@ -48,11 +48,17 @@ const handleFulfilled = (state, action) => {
   if (action.type.startsWith("review/addFreelancer")) {
     state.freelancerList.result.unshift(action.payload.data);
     state.freelancerList.totalRecords += 1;
+    if (state.freelancerList.result.length > 10) {
+      state.freelancerList.result.pop();
+    }
   }
 
   if (action.type.startsWith("review/addReview")) {
     state.reviewsList.result.unshift(action.payload.data);
     state.reviewsList.totalRecords += 1;
+    if (state.reviewsList.result.length > 10) {
+      state.reviewsList.result.pop();
+    }
   }
 };
 
