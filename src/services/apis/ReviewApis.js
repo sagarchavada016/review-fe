@@ -5,7 +5,7 @@ export class ReviewApi {
   static listFreelancer(data) {
     let skip = data.skip ? data.skip : 0;
     let limit = data.limit ? data.limit : 10;
-    let ordering = "-created_at";
+    let ordering = data.ordering;
     let url = `${urls.freelancer.list}?skip=${skip}&limit=${limit}&ordering=${ordering}`;
     return ReviewService.get(url, data);
   }
@@ -28,11 +28,16 @@ export class ReviewApi {
     let freelancerId = data.freelancerId;
     let skip = data.skip ? data.skip : 0;
     let limit = data.limit ? data.limit : 10;
-    let url = `${urls.review.listByFreelancerId}${freelancerId}?skip=${skip}&limit=${limit}`;
+    let ordering = data.ordering;
+    let url = `${urls.review.listByFreelancerId}${freelancerId}?skip=${skip}&limit=${limit}&ordering=${ordering}`;
     return ReviewService.get(url, data);
   }
 
   static listReviews(data) {
-    return ReviewService.get(urls.review.listReviews, data);
+    let skip = data.skip ? data.skip : 0;
+    let limit = data.limit ? data.limit : 10;
+    let ordering = data.ordering;
+    let url = `${urls.review.listReviews}?skip=${skip}&limit=${limit}&ordering=${ordering}`;
+    return ReviewService.get(url, data);
   }
 }

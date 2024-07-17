@@ -1,7 +1,8 @@
 import React, { lazy } from "react";
-import FreelancerReviews from "../pages/FreelancerReviews";
 
 const FreelancersPage = lazy(() => import("../pages/Freelancers"));
+const FreelancerReviews = lazy(() => import("../pages/FreelancerReviews"));
+const Reviews = lazy(() => import("../pages/Reviews"));
 
 const publicRoutes = [
   {
@@ -11,6 +12,10 @@ const publicRoutes = [
   {
     path: "/reviews/:freelancerId",
     element: <FreelancerReviews />,
+  },
+  {
+    path: "/list-reviews",
+    element: <Reviews />,
   },
 ];
 

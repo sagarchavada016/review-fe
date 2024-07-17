@@ -3,7 +3,7 @@ export const urls = {
   review: {
     listByFreelancerId: "/reviews/",
     add: "/review/",
-    listReviews: "/review/list",
+    listReviews: "/reviews/list",
   },
   freelancer: {
     add: "/freelancer/",

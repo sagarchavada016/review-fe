@@ -13,7 +13,7 @@ const Freelancers = () => {
   );
 
   const [skip, setSkip] = useState(0);
-  const [ordering, setOrdering] = useState("created_at");
+  const [ordering, setOrdering] = useState("-created_at");
   const limit = 10;
 
   useEffect(() => {
@@ -28,9 +28,6 @@ const Freelancers = () => {
 
   if (loading) {
     return <p className="text-center text-blue-500 text-lg">Loading...</p>;
-  }
-  if (error) {
-    return <p className="text-center text-red-500 text-lg">Error: {error}</p>;
   }
 
   return (

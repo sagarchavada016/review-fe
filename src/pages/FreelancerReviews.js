@@ -13,18 +13,16 @@ const FreelancerReviews = () => {
 
   const [skip, setSkip] = useState(0);
   const limit = 10;
+  const [ordering, setOrdering] = useState("-created_at");
 
   const [showAddReviewModal, setShowAddReviewModal] = useState(false);
 
   useEffect(() => {
-    dispatch(listReviewByFreelancer({ skip, limit, freelancerId }));
-  }, [dispatch, skip, freelancerId]);
+    dispatch(listReviewByFreelancer({ skip, limit, ordering, freelancerId }));
+  }, [dispatch, skip, freelancerId, ordering]);
 
   if (loading) {
     return <p className="text-center text-blue-500 text-lg">Loading...</p>;
-  }
-  if (error) {
-    return <p className="text-center text-red-500 text-lg">Error: {error}</p>;
   }
 
   return (
@@ -39,6 +37,18 @@ const FreelancerReviews = () => {
         >
           Add Review
         </button>
+        <div className="flex justify-end mb-4">
+          <select
+            value={ordering}
+            onChange={(e) => setOrdering(e.target.value)}
+            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="-created_at">Newest First</option>
+            <option value="created_at">Oldest First</option>
+            <option value="rating">Rating: Low to High</option>
+            <option value="-rating">Rating: High to Low</option>
+          </select>
+        </div>
         {reviewsList && reviewsList.result.length > 0 ? (
           <div className="space-y-4">
             {reviewsList.result.map((review) => (
