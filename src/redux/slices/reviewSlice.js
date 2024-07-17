@@ -11,6 +11,7 @@ import { ReviewApi } from "../../services/apis/ReviewApis";
 export const initialState = {
   loading: false,
   freelancerList: null,
+  reviewsList: null,
   error: null,
 };
 
@@ -31,11 +32,47 @@ const handleFulfilled = (state, action) => {
   }
 };
 
-export const listFreelancer = createAsyncThunk(
-  "review/listFreelancer",
+export const addFreelancer = createAsyncThunk(
+  "review/addFreelancer",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await ReviewApi.listFreelancer(data);
+      const response = await ReviewApi.addFreelancer(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const addReview = createAsyncThunk(
+  "review/addReview",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.addReview(data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const listFreelancer = createAsyncThunk(
+  "review/listFreelancer",
+  async ({ skip = 0, limit = 10 }, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.listFreelancer({ skip, limit });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const listReviewByFreelancer = createAsyncThunk(
+  "review/listReviewByFreelancer",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ReviewApi.listReviewByFreelancer(data);
       return response;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -44,7 +81,7 @@ export const listFreelancer = createAsyncThunk(
 );
 
 export const listReviews = createAsyncThunk(
-  "review/listFreelancer",
+  "review/listReviews",
   async (data, { rejectWithValue }) => {
     try {
       const response = await ReviewApi.listReviews(data);
