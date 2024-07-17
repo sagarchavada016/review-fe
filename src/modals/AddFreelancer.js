@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
+import { Toast } from "../utils/Toasts";
 import { addFreelancer } from "../redux/slices/reviewSlice";
 
 const AddFreelancer = ({ isVisible, onClose }) => {
@@ -12,6 +14,7 @@ const AddFreelancer = ({ isVisible, onClose }) => {
       .unwrap()
       .then(() => {
         onClose(); // Close modal on success
+        Toast.success("Freelancer added successfully!");
         setName(""); // Reset input field after successful addition
       })
       .catch((error) => {
@@ -52,7 +55,7 @@ const AddFreelancer = ({ isVisible, onClose }) => {
             </button>
             <button
               type="submit"
-              className="py-2 px-4 bg-custom-green hover:bg-indigo-700 text-white rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green"
+              className="py-2 px-4 bg-custom-green hover:bg-white text-white hover:text-custom-green rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green"
             >
               Add
             </button>

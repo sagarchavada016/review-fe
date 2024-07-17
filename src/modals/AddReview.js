@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addReview } from "../redux/slices/reviewSlice";
+import { Toast } from "../utils/Toasts";
 
 const AddReview = ({ isVisible, onClose, freelancerId }) => {
   const [reviewerName, setReviewerName] = useState("");
@@ -23,6 +24,7 @@ const AddReview = ({ isVisible, onClose, freelancerId }) => {
         setReviewerName(""); // Reset state on successful addition
         setRating(""); // Reset state on successful addition
         setReviewText(""); // Reset state on successful addition
+        Toast.success("Review added successfully!");
       })
       .catch((error) => {
         console.error("Failed to add review:", error);
@@ -95,7 +97,7 @@ const AddReview = ({ isVisible, onClose, freelancerId }) => {
             </button>
             <button
               type="submit"
-              className="py-2 px-4 bg-custom-green hover:bg-indigo-700 text-white rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green"
+              className="py-2 px-4 bg-custom-green hover:bg-white text-white hover:text-custom-green rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green"
             >
               Add Review
             </button>
