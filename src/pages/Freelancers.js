@@ -24,9 +24,21 @@ const Freelancers = () => {
     navigate(`/reviews/${freelancerId}`);
   };
 
+  const handleAllReviewsClick = () => {
+    navigate("/list-reviews");
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
       <div className="w-full max-w-4xl px-8 py-6 space-y-6">
+        <div className="flex justify-end">
+          <button
+            onClick={handleAllReviewsClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2"
+          >
+            View All Reviews
+          </button>
+        </div>
         <h1 className="text-2xl font-bold text-gray-800">Freelancers List</h1>
         <button
           onClick={() => setShowAddModal(true)}

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { listReviews } from "../redux/slices/reviewSlice";
 import Pagination from "../components/Pagination";
 
 const Reviews = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { allReviewsList } = useSelector((state) => state.review);
 
   const [skip, setSkip] = useState(0);
@@ -15,9 +18,21 @@ const Reviews = () => {
     dispatch(listReviews({ skip, limit, ordering }));
   }, [dispatch, skip, ordering]);
 
+  const handleAllFreelancerClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8">
       <div className="w-full max-w-screen-lg px-8 py-6 space-y-6">
+        <div className="flex justify-end">
+          <button
+            onClick={handleAllFreelancerClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2"
+          >
+            View All Freelancer
+          </button>
+        </div>
         <h1 className="text-2xl font-bold text-gray-800">Reviews List</h1>
         <div className="flex justify-end mb-4">
           <select
