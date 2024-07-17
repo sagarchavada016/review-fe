@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { listFreelancer } from "../redux/slices/reviewSlice";
 import Pagination from "../components/Pagination";
 import AddFreelancer from "../modals/AddFreelancer";
 
 const Freelancers = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, error, freelancerList } = useSelector(
     (state) => state.review
   );
 
   const [skip, setSkip] = useState(0);
+  const [ordering, setOrdering] = useState("created_at");
   const limit = 10;
 
   useEffect(() => {
-    dispatch(listFreelancer({ skip, limit }));
+    dispatch(listFreelancer({ skip, limit, ordering }));
   }, [dispatch, skip]);
 
   const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleRowClick = (freelancerId) => {
+    navigate(`/reviews/${freelancerId}`);
+  };
 
   if (loading) {
     return <p className="text-center text-blue-500 text-lg">Loading...</p>;
@@ -41,7 +48,8 @@ const Freelancers = () => {
             {freelancerList.result.map((freelancer) => (
               <div
                 key={freelancer.id}
-                className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow"
+                className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => handleRowClick(freelancer.id)}
               >
                 <div className="flex items-center space-x-3 mb-4 md:mb-0">
                   <span className="text-sm font-medium text-gray-600">ID:</span>
@@ -63,12 +71,14 @@ const Freelancers = () => {
         ) : (
           <p className="text-center text-gray-600">No freelancers found.</p>
         )}
-        <Pagination
-          total={freelancerList.totalRecords}
-          limit={limit}
-          skip={skip}
-          onPageChange={(newSkip) => setSkip(newSkip)}
-        />
+        {freelancerList && freelancerList.totalRecords > 0 && (
+          <Pagination
+            total={freelancerList.totalRecords}
+            limit={limit}
+            skip={skip}
+            onPageChange={(newSkip) => setSkip(newSkip)}
+          />
+        )}
       </div>
       <AddFreelancer
         isVisible={showAddModal}

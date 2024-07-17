@@ -11,7 +11,7 @@ import { ReviewApi } from "../../services/apis/ReviewApis";
 export const initialState = {
   loading: false,
   freelancerList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
-  reviewsList: null,
+  reviewsList: { result: [], totalRecords: 0, totalFilterRecords: 0 },
   error: null,
 };
 
@@ -31,8 +31,18 @@ const handleFulfilled = (state, action) => {
     state.freelancerList = action.payload?.data;
   }
 
+  if (action.type.startsWith("review/listReviewByFreelancer")) {
+    state.reviewsList = action.payload?.data;
+  }
+
   if (action.type.startsWith("review/addFreelancer")) {
     state.freelancerList.result.push(action.payload.data);
+    state.freelancerList.totalRecords = state.freelancerList.totalRecords + 1;
+  }
+
+  if (action.type.startsWith("review/addReview")) {
+    state.reviewsList.result.push(action.payload.data);
+    state.reviewsList.totalRecords = state.reviewsList.totalRecords + 1;
   }
 };
 
@@ -62,9 +72,16 @@ export const addReview = createAsyncThunk(
 
 export const listFreelancer = createAsyncThunk(
   "review/listFreelancer",
-  async ({ skip = 0, limit = 10 }, { rejectWithValue }) => {
+  async (
+    { skip = 0, limit = 10, ordering = "created_at" },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await ReviewApi.listFreelancer({ skip, limit });
+      const response = await ReviewApi.listFreelancer({
+        skip,
+        limit,
+        ordering,
+      });
       return response;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
