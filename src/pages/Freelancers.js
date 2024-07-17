@@ -34,7 +34,7 @@ const Freelancers = () => {
         <div className="flex justify-end">
           <button
             onClick={handleAllReviewsClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2"
+            className="bg-custom-green hover:bg-white text-white hover:text-custom-green font-bold py-2 px-4 rounded mb-2"
           >
             View All Reviews
           </button>
@@ -42,7 +42,7 @@ const Freelancers = () => {
         <h1 className="text-2xl font-bold text-gray-800">Freelancers List</h1>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-custom-green hover:bg-white text-white hover:text-custom-green font-bold py-2 px-4 rounded"
         >
           Add Freelancer
         </button>
@@ -50,7 +50,7 @@ const Freelancers = () => {
           <select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}
-            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green"
           >
             <option value="-created_at">Newest First</option>
             <option value="created_at">Oldest First</option>
@@ -62,7 +62,7 @@ const Freelancers = () => {
             {freelancerList.result.map((freelancer) => (
               <div
                 key={freelancer.id}
-                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow w-full cursor-pointer"
+                className="flex flex-col md:flex-row justify-between items-start bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow w-full cursor-pointer hover:bg-white hover:border-custom-green hover:border-2"
                 onClick={() => handleRowClick(freelancer.id)}
               >
                 <div className="flex-1 mb-4 md:mb-0 md:flex md:items-center md:space-x-3 overflow-hidden">
@@ -75,7 +75,7 @@ const Freelancers = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Name:
                   </span>
-                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                  <span className="text-lg font-semibold text-custom-green truncate">
                     {freelancer.name}
                   </span>
                 </div>
@@ -83,7 +83,7 @@ const Freelancers = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Review Count
                   </span>
-                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                  <span className="text-lg font-semibold text-custom-green truncate">
                     {freelancer.review_count}
                   </span>
                 </div>

@@ -47,7 +47,7 @@ const FreelancerReviews = () => {
         </div>
         <button
           onClick={() => setShowAddReviewModal(true)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-custom-green hover:bg-white text-white hover:text-custom-green font-bold py-2 px-4 rounded"
         >
           Add Review
         </button>
@@ -56,7 +56,7 @@ const FreelancerReviews = () => {
             <span className="text-lg font-semibold text-gray-800">
               Average Rating:{" "}
             </span>
-            <span className="text-lg font-semibold text-indigo-600">
+            <span className="text-lg font-semibold text-custom-green">
               {freelancerAvgReview.average_rating
                 ? parseFloat(freelancerAvgReview.average_rating).toFixed(2)
                 : "No Ratings"}
@@ -65,7 +65,7 @@ const FreelancerReviews = () => {
           <select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}
-            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green"
           >
             <option value="-created_at">Newest First</option>
             <option value="created_at">Oldest First</option>
@@ -92,7 +92,7 @@ const FreelancerReviews = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Rating:
                   </span>
-                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                  <span className="text-lg font-semibold text-custom-green truncate">
                     {review.rating}
                   </span>
                 </div>
@@ -100,7 +100,7 @@ const FreelancerReviews = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Content:
                   </span>
-                  <span className="text-lg font-semibold text-indigo-600 truncate">
+                  <span className="text-lg font-semibold text-custom-green truncate">
                     {review.review_text}
                   </span>
                 </div>
